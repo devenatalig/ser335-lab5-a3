@@ -17,7 +17,7 @@ model {
                     // Getting ourselves rekt and overflowing buffers
                     // But we want that to happen so that the JVM has
                     // to step in. See ChecksumCalculator.c
-                    cCompiler.args '-fno-sanitize=address'
+                    //cCompiler.args '-fno-sanitize=address'
                 }
 
                 if(targetPlatform.operatingSystem.macOsX) {
