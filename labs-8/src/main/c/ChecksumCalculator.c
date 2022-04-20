@@ -13,7 +13,7 @@ int digest(char *src_filename, char *dst_filename) {
 }
 
 JNIEXPORT jlong JNICALL Java_ru_gvsmirnov_perv_labs_rekt_ChecksumCalculator_calculateChecksum
-  (JNIEnv * jniEnv, jclass clazz, jstring filename) {
+(JNIEnv * jniEnv, jclass clazz, jstring filename) {
 
     int result;
     const char *src_filename;
@@ -22,16 +22,20 @@ JNIEXPORT jlong JNICALL Java_ru_gvsmirnov_perv_labs_rekt_ChecksumCalculator_calc
     // Get the source file name
     src_filename = (*jniEnv)->GetStringUTFChars(jniEnv, filename, NULL);
 
+    if (strlen(src_filename) > MAX_FILE_NAME_LENGTH) {
+        return 0;
+    } else {
     // Get the name of the file to write checksum to (and "accidentally" overflow the buffer)
-    sprintf(dst_filename, "%s.digested", src_filename);
+        sprintf(dst_filename, "%s.digested", src_filename);
 
     // Write the checksum to the destination file and also get its value
-    result = digest(src_filename, dst_filename);
+        result = digest(src_filename, dst_filename);
 
     // Free the memory used for source file name
-    (*jniEnv)->ReleaseStringUTFChars(jniEnv, filename, src_filename);
+        (*jniEnv)->ReleaseStringUTFChars(jniEnv, filename, src_filename);
 
-    printf("Exiting native method with checksum: %d\n", result);
+        printf("Exiting native method with checksum: %d\n", result);
 
-    return result;
+        return result;
+    }
 }
