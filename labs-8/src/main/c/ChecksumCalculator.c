@@ -12,7 +12,7 @@ int checksum (unsigned char *ptr, size_t sz) {
     unsigned char chk = 0;
     while (sz-- != 0)
         chk -= *ptr++;
-    int i = (int)(c - '0');
+    int i = (int)(chk - '0');
     return i;
 }
 
