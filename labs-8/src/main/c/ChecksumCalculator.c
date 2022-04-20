@@ -1,4 +1,7 @@
 #include "jni_exports.h"
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #ifndef MAX_FILE_NAME_LENGTH
 // 17 is strlen(123.txt.digested) + 1 for the terminating zero byte
@@ -15,7 +18,14 @@ int checksum (unsigned char *ptr, size_t sz) {
 
 int digest(char *src_filename, char *dst_filename) {
     int result = checksum(src_filename,strlen(src_filename));
-    
+
+    FILE *fptr;
+    fptr = fopen(dst_filename,"w");
+
+    fprintf(fptr,"%d",result);
+
+    fclose(fptr);
+
   return result;
 }
 
