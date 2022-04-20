@@ -5,11 +5,18 @@
 #define MAX_FILE_NAME_LENGTH 17
 #endif
 
+int checksum (unsigned char *ptr, size_t sz) {
+    unsigned char chk = 0;
+    while (sz-- != 0)
+        chk -= *ptr++;
+    int i = (int)(c - '0');
+    return i;
+}
+
 int digest(char *src_filename, char *dst_filename) {
-  // For this demonstration, we do not actually need to do anything here
-  // Assume that this function opens src file, calculates the checksum
-  // and writes it to dst_filename.
-  return rand();
+    int result = checksum(src_filename,strlen(src_filename));
+    
+  return result;
 }
 
 JNIEXPORT jlong JNICALL Java_ru_gvsmirnov_perv_labs_rekt_ChecksumCalculator_calculateChecksum
